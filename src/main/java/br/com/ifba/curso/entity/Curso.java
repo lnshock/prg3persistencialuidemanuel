@@ -1,0 +1,17 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package br.com.ifba.curso.entity;
+
+
+
+
+/**
+ *
+ * @author LUID1.7
+ */
+
+public class Curso {
+    
+}
