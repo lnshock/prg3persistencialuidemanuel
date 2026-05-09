@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.com.ifba.curso.view;
-
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import java.util.List;
+import br.com.ifba.curso.dao.CursoDao;
+import br.com.ifba.curso.entity.Curso;
 /**
  *
  * @author LUID1.7
@@ -50,7 +53,6 @@ public class CursoListar extends javax.swing.JFrame {
         btnEditar6 = new javax.swing.JButton();
         btnEditar7 = new javax.swing.JButton();
         btnEditar8 = new javax.swing.JButton();
-        btnEditar9 = new javax.swing.JButton();
         lblEditar = new java.awt.Label();
         btnEditar1 = new javax.swing.JButton();
         btnEditar2 = new javax.swing.JButton();
@@ -58,6 +60,7 @@ public class CursoListar extends javax.swing.JFrame {
         btnEditar4 = new javax.swing.JButton();
         btnEditar5 = new javax.swing.JButton();
         btnAdicionar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 204));
@@ -91,130 +94,103 @@ public class CursoListar extends javax.swing.JFrame {
         lblRemover.setForeground(new java.awt.Color(255, 255, 255));
         lblRemover.setText("REMOVER");
 
-        btnPesquisar.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Pesquisa.png")); // NOI18N
+        btnPesquisar.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Pesquisa.png")); // NOI18N
         btnPesquisar.setBorder(null);
         btnPesquisar.setContentAreaFilled(false);
         btnPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPesquisar.addActionListener(this::btnPesquisarActionPerformed);
 
-        btnRemover1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
+        btnRemover1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
         btnRemover1.setText("\n");
         btnRemover1.setBorder(null);
         btnRemover1.setContentAreaFilled(false);
         btnRemover1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRemover1.addActionListener(this::btnRemover1ActionPerformed);
 
-        btnRemover2.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
+        btnRemover2.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
         btnRemover2.setContentAreaFilled(false);
         btnRemover2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRemover2.addActionListener(this::btnRemover2ActionPerformed);
 
-        btnRemover3.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
+        btnRemover3.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
         btnRemover3.setContentAreaFilled(false);
         btnRemover3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRemover3.addActionListener(this::btnRemover3ActionPerformed);
 
-        btnRemover4.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
+        btnRemover4.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
         btnRemover4.setContentAreaFilled(false);
         btnRemover4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRemover4.addActionListener(this::btnRemover4ActionPerformed);
 
-        btnRemover5.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
+        btnRemover5.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
         btnRemover5.setContentAreaFilled(false);
         btnRemover5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRemover5.addActionListener(this::btnRemover5ActionPerformed);
 
-        btnRemover6.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
+        btnRemover6.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
         btnRemover6.setContentAreaFilled(false);
         btnRemover6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRemover6.addActionListener(this::btnRemover6ActionPerformed);
 
-        btnRemover7.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
+        btnRemover7.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
         btnRemover7.setContentAreaFilled(false);
         btnRemover7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRemover7.addActionListener(this::btnRemover7ActionPerformed);
 
-        btnRemover8.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
+        btnRemover8.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
         btnRemover8.setContentAreaFilled(false);
         btnRemover8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRemover8.addActionListener(this::btnRemover8ActionPerformed);
 
-        btnRemover9.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
+        btnRemover9.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Lixeira.png")); // NOI18N
         btnRemover9.setContentAreaFilled(false);
         btnRemover9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRemover9.addActionListener(this::btnRemover9ActionPerformed);
 
-        btnEditar6.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar6.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar6.setContentAreaFilled(false);
 
-        btnEditar7.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar7.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar7.setContentAreaFilled(false);
 
-        btnEditar8.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar8.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar8.setContentAreaFilled(false);
-
-        btnEditar9.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
-        btnEditar9.setContentAreaFilled(false);
-        btnEditar9.addActionListener(this::btnEditar9ActionPerformed);
 
         lblEditar.setAlignment(java.awt.Label.CENTER);
         lblEditar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         lblEditar.setForeground(new java.awt.Color(255, 255, 255));
         lblEditar.setText("EDITAR");
 
-        btnEditar1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar1.setBorder(null);
         btnEditar1.setContentAreaFilled(false);
         btnEditar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEditar1.addActionListener(this::btnEditar1ActionPerformed);
 
-        btnEditar2.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar2.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar2.setContentAreaFilled(false);
 
-        btnEditar3.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar3.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar3.setContentAreaFilled(false);
         btnEditar3.addActionListener(this::btnEditar3ActionPerformed);
 
-        btnEditar4.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar4.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar4.setContentAreaFilled(false);
 
-        btnEditar5.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar5.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar5.setContentAreaFilled(false);
 
-        btnAdicionar.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\NetBeansProjects\\prg3persistencia\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Adicionar.png")); // NOI18N
+        btnAdicionar.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Adicionar.png")); // NOI18N
         btnAdicionar.setBorder(null);
         btnAdicionar.setContentAreaFilled(false);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnRemover8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnRemover7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnRemover6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnRemover5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnRemover4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnRemover1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnRemover3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnRemover2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemover9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditar9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnEditar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(125, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,15 +206,46 @@ public class CursoListar extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(lblQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(lblRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(126, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))))
+                        .addGap(48, 48, 48)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnRemover8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnRemover7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnRemover6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnRemover5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnRemover4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnRemover1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnRemover3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnRemover2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRemover9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEditar7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditar6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditar5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditar8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +259,7 @@ public class CursoListar extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblFornecedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,58 +267,98 @@ public class CursoListar extends javax.swing.JFrame {
                     .addComponent(lblRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRemover2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRemover3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRemover4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRemover5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRemover6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRemover7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRemover8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(8, 8, 8)
-                            .addComponent(btnRemover9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar9, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(btnRemover9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRemover3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover3ActionPerformed
-        // TODO add your handling code here:
+                try {
+            // Antes de remover realizamos uma busca pelo id
+            entityManager.getTransaction().begin();
+            Curso cursoEncontrado = entityManager.find(Curso.class, 1L); // Exemplo com ID 1
+            
+            if (cursoEncontrado != null) {
+                entityManager.remove(cursoEncontrado); // Deleta o objeto [cite: 651]
+                entityManager.getTransaction().commit();
+                JOptionPane.showMessageDialog(this, "Curso removido!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
+                entityManager.getTransaction().rollback();
+            }
+        } catch (Exception ex) {
+            // Tratamento se algum erro acontecer durante a remoção [cite: 634, 848-853]
+            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        }
+    }         
     }//GEN-LAST:event_btnRemover3ActionPerformed
 
     private void btnRemover2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover2ActionPerformed
-        // TODO add your handling code here:
+                try {
+            // Antes de remover realizamos uma busca pelo id
+            entityManager.getTransaction().begin();
+            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
+            
+            if (cursoEncontrado != null) {
+                entityManager.remove(cursoEncontrado); // Deleta o objeto 
+                entityManager.getTransaction().commit();
+                JOptionPane.showMessageDialog(this, "Curso removido!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
+                entityManager.getTransaction().rollback();
+            }
+        } catch (Exception ex) {
+            // Tratamento se algum erro acontecer durante a remoção 
+            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        }
+            
     }//GEN-LAST:event_btnRemover2ActionPerformed
 
     private void btnRemover1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover1ActionPerformed
@@ -319,45 +366,178 @@ public class CursoListar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemover1ActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
+            try {
+            // Buscando todos os cursos
+            List<Curso> cursos = entityManager
+                    .createQuery("select c from Curso as c", Curso.class)
+                    .getResultList();
+
+            jTextArea1.setText(""); // Limpa a área de texto
+            for (Curso curso : cursos) {
+                // Exibindo o resultado da pesquisa 
+                jTextArea1.append("ID: " + curso.getId() + " - Nome: " + curso.getNome() + "\n");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro na busca: " + ex.getMessage());
+        }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void btnEditar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditar9ActionPerformed
-
     private void btnRemover9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover9ActionPerformed
-        // TODO add your handling code here:
+          try {
+            // Antes de remover realizamos uma busca pelo id
+            entityManager.getTransaction().begin();
+            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
+            
+            if (cursoEncontrado != null) {
+                entityManager.remove(cursoEncontrado); // Deleta o objeto 
+                entityManager.getTransaction().commit();
+                JOptionPane.showMessageDialog(this, "Curso removido!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
+                entityManager.getTransaction().rollback();
+            }
+        } catch (Exception ex) {
+            // Tratamento se algum erro acontecer durante a remoção 
+            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        }
     }//GEN-LAST:event_btnRemover9ActionPerformed
 
     private void btnRemover8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover8ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // Antes de remover realizamos uma busca pelo id
+            entityManager.getTransaction().begin();
+            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
+            
+            if (cursoEncontrado != null) {
+                entityManager.remove(cursoEncontrado); // Deleta o objeto 
+                entityManager.getTransaction().commit();
+                JOptionPane.showMessageDialog(this, "Curso removido!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
+                entityManager.getTransaction().rollback();
+            }
+        } catch (Exception ex) {
+            // Tratamento se algum erro acontecer durante a remoção 
+            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        
     }//GEN-LAST:event_btnRemover8ActionPerformed
 
     private void btnRemover7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover7ActionPerformed
-        // TODO add your handling code here:
+               try {
+            // Antes de remover realizamos uma busca pelo id
+            entityManager.getTransaction().begin();
+            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
+            
+            if (cursoEncontrado != null) {
+                entityManager.remove(cursoEncontrado); // Deleta o objeto 
+                entityManager.getTransaction().commit();
+                JOptionPane.showMessageDialog(this, "Curso removido!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
+                entityManager.getTransaction().rollback();
+            }
+        } catch (Exception ex) {
+            // Tratamento se algum erro acontecer durante a remoção 
+            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        
     }//GEN-LAST:event_btnRemover7ActionPerformed
 
     private void btnRemover6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover6ActionPerformed
-        // TODO add your handling code here:
+         try {
+            // Antes de remover realizamos uma busca pelo id
+            entityManager.getTransaction().begin();
+            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
+            
+            if (cursoEncontrado != null) {
+                entityManager.remove(cursoEncontrado); // Deleta o objeto 
+                entityManager.getTransaction().commit();
+                JOptionPane.showMessageDialog(this, "Curso removido!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
+                entityManager.getTransaction().rollback();
+            }
+        } catch (Exception ex) {
+            // Tratamento se algum erro acontecer durante a remoção 
+            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        
     }//GEN-LAST:event_btnRemover6ActionPerformed
 
     private void btnRemover5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover5ActionPerformed
-        // TODO add your handling code here:
+         try {
+            // Antes de remover realizamos uma busca pelo id
+            entityManager.getTransaction().begin();
+            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
+            
+            if (cursoEncontrado != null) {
+                entityManager.remove(cursoEncontrado); // Deleta o objeto 
+                entityManager.getTransaction().commit();
+                JOptionPane.showMessageDialog(this, "Curso removido!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
+                entityManager.getTransaction().rollback();
+            }
+        } catch (Exception ex) {
+            // Tratamento se algum erro acontecer durante a remoção 
+            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        
     }//GEN-LAST:event_btnRemover5ActionPerformed
 
     private void btnRemover4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover4ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // Antes de remover realizamos uma busca pelo id
+            entityManager.getTransaction().begin();
+            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
+            
+            if (cursoEncontrado != null) {
+                entityManager.remove(cursoEncontrado); // Deleta o objeto 
+                entityManager.getTransaction().commit();
+                JOptionPane.showMessageDialog(this, "Curso removido!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
+                entityManager.getTransaction().rollback();
+            }
+        } catch (Exception ex) {
+            // Tratamento se algum erro acontecer durante a remoção 
+            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        
     }//GEN-LAST:event_btnRemover4ActionPerformed
 
     private void btnEditar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditar3ActionPerformed
 
+    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+       // Inicializando as configurações do JPA
+    private final static EntityManagerFactory entityManagerFactory = 
+            Persistence.createEntityManagerFactory("gerenciamento_curso");
+    private final static EntityManager entityManager = 
+            entityManagerFactory.createEntityManager();
+    
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -390,7 +570,6 @@ public class CursoListar extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar6;
     private javax.swing.JButton btnEditar7;
     private javax.swing.JButton btnEditar8;
-    private javax.swing.JButton btnEditar9;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRemover1;
     private javax.swing.JButton btnRemover2;
@@ -401,6 +580,7 @@ public class CursoListar extends javax.swing.JFrame {
     private javax.swing.JButton btnRemover7;
     private javax.swing.JButton btnRemover8;
     private javax.swing.JButton btnRemover9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
