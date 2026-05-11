@@ -2,6 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
+package br.com.ifba.curso.view
+        ;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import java.util.List;
@@ -12,7 +15,10 @@ import br.com.ifba.curso.entity.Curso;
  * @author LUID1.7
  */
 public class CursoListar extends javax.swing.JFrame {
-    
+    private static final jakarta.persistence.EntityManagerFactory entityManagerFactory = 
+            jakarta.persistence.Persistence.createEntityManagerFactory("gerenciamento_curso");
+    private static final jakarta.persistence.EntityManager entityManager = 
+            entityManagerFactory.createEntityManager();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CursoListar.class.getName());
 
     /**
@@ -334,7 +340,7 @@ public class CursoListar extends javax.swing.JFrame {
                 entityManager.getTransaction().rollback();
             }
         }
-    }         
+            
     }//GEN-LAST:event_btnRemover3ActionPerformed
 
     private void btnRemover2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover2ActionPerformed
@@ -424,7 +430,7 @@ public class CursoListar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
-            }
+            }}
         
     }//GEN-LAST:event_btnRemover8ActionPerformed
 
@@ -447,7 +453,7 @@ public class CursoListar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
-            }
+            }}
         
     }//GEN-LAST:event_btnRemover7ActionPerformed
 
@@ -470,7 +476,7 @@ public class CursoListar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
-            }
+            }}
         
     }//GEN-LAST:event_btnRemover6ActionPerformed
 
@@ -493,7 +499,7 @@ public class CursoListar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
-            }
+            }}
         
     }//GEN-LAST:event_btnRemover5ActionPerformed
 
@@ -517,7 +523,7 @@ public class CursoListar extends javax.swing.JFrame {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-        
+        }
     }//GEN-LAST:event_btnRemover4ActionPerformed
 
     private void btnEditar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar3ActionPerformed
@@ -533,18 +539,7 @@ public class CursoListar extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
        // Inicializando as configurações do JPA
-    private final static EntityManagerFactory entityManagerFactory = 
-            Persistence.createEntityManagerFactory("gerenciamento_curso");
-    private final static EntityManager entityManager = 
-            entityManagerFactory.createEntityManager();
-    
-        
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
+try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -554,11 +549,11 @@ public class CursoListar extends javax.swing.JFrame {
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new CursoListar().setVisible(true));
     }
+        
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
