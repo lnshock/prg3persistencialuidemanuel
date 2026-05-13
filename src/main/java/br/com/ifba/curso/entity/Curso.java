@@ -1,19 +1,14 @@
 package br.com.ifba.curso.entity;
 
+import br.com.ifba.infrastructure.entity.PersistenceEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 
-@Entity // Indica que a classe vai persistír
-@Table(name = "cursos") // Define o nome da tabela no banco
-public class Curso {
-
-    @Id // Chave primária 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@Entity
+@Table(name = "cursos")
+public class Curso extends PersistenceEntity implements Serializable {
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -25,14 +20,6 @@ public class Curso {
     private boolean ativo;
 
     // Métodos Getters e Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }

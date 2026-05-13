@@ -2,24 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-package br.com.ifba.curso.view
-        ;
+package br.com.ifba.curso.view;
+        
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import java.util.List;
-import br.com.ifba.curso.dao.CursoDao;
+import br.com.ifba.curso.controller.CursoController;
+import br.com.ifba.curso.controller.ICursoController;
 import br.com.ifba.curso.entity.Curso;
 /**
  *
  * @author LUID1.7
  */
 public class CursoListar extends javax.swing.JFrame {
-    private static final jakarta.persistence.EntityManagerFactory entityManagerFactory = 
-            jakarta.persistence.Persistence.createEntityManagerFactory("gerenciamento_curso");
-    private static final jakarta.persistence.EntityManager entityManager = 
-            entityManagerFactory.createEntityManager();
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CursoListar.class.getName());
+ private final ICursoController cursoController = new CursoController();
 
     /**
      * Creates new form CursoListar
@@ -45,7 +41,6 @@ public class CursoListar extends javax.swing.JFrame {
         lblNome = new java.awt.Label();
         lblQuantidade = new java.awt.Label();
         lblFornecedor = new java.awt.Label();
-        lblRemover = new java.awt.Label();
         btnPesquisar = new javax.swing.JButton();
         btnRemover1 = new javax.swing.JButton();
         btnRemover2 = new javax.swing.JButton();
@@ -59,13 +54,17 @@ public class CursoListar extends javax.swing.JFrame {
         btnEditar6 = new javax.swing.JButton();
         btnEditar7 = new javax.swing.JButton();
         btnEditar8 = new javax.swing.JButton();
-        lblEditar = new java.awt.Label();
+        lblRemove = new java.awt.Label();
         btnEditar1 = new javax.swing.JButton();
         btnEditar2 = new javax.swing.JButton();
         btnEditar3 = new javax.swing.JButton();
         btnEditar4 = new javax.swing.JButton();
         btnEditar5 = new javax.swing.JButton();
         btnAdicionar = new javax.swing.JButton();
+        btnEditar9 = new javax.swing.JButton();
+        lblEditar1 = new java.awt.Label();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtAdicionar = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,11 +93,6 @@ public class CursoListar extends javax.swing.JFrame {
         lblFornecedor.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         lblFornecedor.setForeground(new java.awt.Color(255, 255, 255));
         lblFornecedor.setText("FORNECEDOR");
-
-        lblRemover.setAlignment(java.awt.Label.CENTER);
-        lblRemover.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        lblRemover.setForeground(new java.awt.Color(255, 255, 255));
-        lblRemover.setText("REMOVER");
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Pesquisa.png")); // NOI18N
         btnPesquisar.setBorder(null);
@@ -155,17 +149,20 @@ public class CursoListar extends javax.swing.JFrame {
 
         btnEditar6.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar6.setContentAreaFilled(false);
+        btnEditar6.addActionListener(this::btnEditar6ActionPerformed);
 
         btnEditar7.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar7.setContentAreaFilled(false);
+        btnEditar7.addActionListener(this::btnEditar7ActionPerformed);
 
         btnEditar8.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar8.setContentAreaFilled(false);
+        btnEditar8.addActionListener(this::btnEditar8ActionPerformed);
 
-        lblEditar.setAlignment(java.awt.Label.CENTER);
-        lblEditar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        lblEditar.setForeground(new java.awt.Color(255, 255, 255));
-        lblEditar.setText("EDITAR");
+        lblRemove.setAlignment(java.awt.Label.CENTER);
+        lblRemove.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        lblRemove.setForeground(new java.awt.Color(255, 255, 255));
+        lblRemove.setText("REMOVER");
 
         btnEditar1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar1.setBorder(null);
@@ -175,6 +172,7 @@ public class CursoListar extends javax.swing.JFrame {
 
         btnEditar2.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar2.setContentAreaFilled(false);
+        btnEditar2.addActionListener(this::btnEditar2ActionPerformed);
 
         btnEditar3.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar3.setContentAreaFilled(false);
@@ -182,15 +180,33 @@ public class CursoListar extends javax.swing.JFrame {
 
         btnEditar4.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar4.setContentAreaFilled(false);
+        btnEditar4.addActionListener(this::btnEditar4ActionPerformed);
 
         btnEditar5.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
         btnEditar5.setContentAreaFilled(false);
+        btnEditar5.addActionListener(this::btnEditar5ActionPerformed);
 
         btnAdicionar.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\Adicionar.png")); // NOI18N
         btnAdicionar.setBorder(null);
         btnAdicionar.setContentAreaFilled(false);
+        btnAdicionar.addActionListener(this::btnAdicionarActionPerformed);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar9.setIcon(new javax.swing.ImageIcon("C:\\Users\\LUID1.7\\Documents\\GitHub\\prg3persistencia\\prg3persistencialuidemanuel\\src\\main\\java\\br\\com\\ifba\\curso\\images\\editarPng.png")); // NOI18N
+        btnEditar9.setBorder(null);
+        btnEditar9.setBorderPainted(false);
+        btnEditar9.setContentAreaFilled(false);
+        btnEditar9.addActionListener(this::btnEditar9ActionPerformed);
+
+        lblEditar1.setAlignment(java.awt.Label.CENTER);
+        lblEditar1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        lblEditar1.setForeground(new java.awt.Color(255, 255, 255));
+        lblEditar1.setText("EDITAR");
+
+        jScrollPane3.setViewportView(txtAdicionar);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("NOME A SER ADICIONADO");
+        jLabel1.setFocusable(false);
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,18 +224,17 @@ public class CursoListar extends javax.swing.JFrame {
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdicionar)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(lblQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)))
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,27 +251,29 @@ public class CursoListar extends javax.swing.JFrame {
                             .addComponent(btnRemover9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEditar8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
                             .addComponent(btnEditar7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEditar6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEditar5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnEditar9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnEditar4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnEditar3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                                    .addComponent(btnEditar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEditar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(185, Short.MAX_VALUE))
+                        .addComponent(lblQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87)
+                        .addComponent(lblRemove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(171, 171, 171))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,36 +281,26 @@ public class CursoListar extends javax.swing.JFrame {
                             .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFornecedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEditar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addComponent(lblFornecedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblQuantidade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRemover2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,250 +314,463 @@ public class CursoListar extends javax.swing.JFrame {
                                 .addComponent(btnRemover6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRemover7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRemover8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditar7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(btnRemover9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(30, 30, 30))
+                            .addComponent(btnRemover8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditar8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRemover9, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditar9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(29, 29, 29))))
         );
+
+        lblRemove.getAccessibleContext().setAccessibleName("REMOVER");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRemover3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover3ActionPerformed
-                try {
-            // Antes de remover realizamos uma busca pelo id
-            entityManager.getTransaction().begin();
-            Curso cursoEncontrado = entityManager.find(Curso.class, 1L); // Exemplo com ID 1
-            
-            if (cursoEncontrado != null) {
-                entityManager.remove(cursoEncontrado); // Deleta o objeto [cite: 651]
-                entityManager.getTransaction().commit();
-                JOptionPane.showMessageDialog(this, "Curso removido!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
-                entityManager.getTransaction().rollback();
-            }
-        } catch (Exception ex) {
-            // Tratamento se algum erro acontecer durante a remoção [cite: 634, 848-853]
-            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-        }
-            
-    }//GEN-LAST:event_btnRemover3ActionPerformed
+             // Procura o curso no sistema pelo seu código único
+    Curso curso = cursoController.findById(1L);
 
+    // Se o curso existir, executa a remoção
+    if (curso != null) {
+        // Ordena ao controlador a exclusão definitiva
+        cursoController.delete(curso);
+
+        // Avisa que a operação foi concluída com sucesso
+        JOptionPane.showMessageDialog(this, "Curso removido!");
+    }
+    }//GEN-LAST:event_btnRemover3ActionPerformed
     private void btnRemover2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover2ActionPerformed
-                try {
-            // Antes de remover realizamos uma busca pelo id
-            entityManager.getTransaction().begin();
-            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
-            
-            if (cursoEncontrado != null) {
-                entityManager.remove(cursoEncontrado); // Deleta o objeto 
-                entityManager.getTransaction().commit();
+       try {
+            // Procura o curso no sistema pelo seu código único
+            Curso curso = cursoController.findById(1L);
+            // Se o curso existir, executa a remoção
+            if (curso != null) {
+                // Ordena ao controlador a exclusão definitiva
+                cursoController.delete(curso);
+                // Avisa que a operação foi concluída com sucesso
                 JOptionPane.showMessageDialog(this, "Curso removido!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
-                entityManager.getTransaction().rollback();
             }
-        } catch (Exception ex) {
-            // Tratamento se algum erro acontecer durante a remoção 
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
         }
-            
     }//GEN-LAST:event_btnRemover2ActionPerformed
 
     private void btnRemover1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover1ActionPerformed
-        // TODO add your handling code here:
+     try {
+            // Procura o curso no sistema pelo seu código único
+            Curso curso = cursoController.findById(1L);
+            // Se o curso existir, executa a remoção
+            if (curso != null) {
+                // Ordena ao controlador a exclusão definitiva
+                cursoController.delete(curso);
+                // Avisa que a operação foi concluída com sucesso
+                JOptionPane.showMessageDialog(this, "Curso removido!");
+            }
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
+        }
     }//GEN-LAST:event_btnRemover1ActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-            try {
-            // Buscando todos os cursos
-            List<Curso> cursos = entityManager
-                    .createQuery("select c from Curso as c", Curso.class)
-                    .getResultList();
+     try {
+            // Solicita ao controlador a busca por nome
+            String nome = txtPesquisa.getText();
+            List<Curso> cursos = cursoController.findByNome(nome);
 
-            jTextArea1.setText(""); // Limpa a área de texto
+            jTextArea1.setText(""); 
             for (Curso curso : cursos) {
-                // Exibindo o resultado da pesquisa 
                 jTextArea1.append("ID: " + curso.getId() + " - Nome: " + curso.getNome() + "\n");
             }
-        } catch (Exception ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Erro na busca: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnRemover9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover9ActionPerformed
-          try {
-            // Antes de remover realizamos uma busca pelo id
-            entityManager.getTransaction().begin();
-            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
-            
-            if (cursoEncontrado != null) {
-                entityManager.remove(cursoEncontrado); // Deleta o objeto 
-                entityManager.getTransaction().commit();
+       try {
+            // Procura o curso no sistema pelo seu código único
+            Curso curso = cursoController.findById(1L);
+            // Se o curso existir, executa a remoção
+            if (curso != null) {
+                // Ordena ao controlador a exclusão definitiva
+                cursoController.delete(curso);
+                // Avisa que a operação foi concluída com sucesso
                 JOptionPane.showMessageDialog(this, "Curso removido!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
-                entityManager.getTransaction().rollback();
             }
-        } catch (Exception ex) {
-            // Tratamento se algum erro acontecer durante a remoção 
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
         }
     }//GEN-LAST:event_btnRemover9ActionPerformed
 
     private void btnRemover8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover8ActionPerformed
-        try {
-            // Antes de remover realizamos uma busca pelo id
-            entityManager.getTransaction().begin();
-            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
-            
-            if (cursoEncontrado != null) {
-                entityManager.remove(cursoEncontrado); // Deleta o objeto 
-                entityManager.getTransaction().commit();
+     try {
+            // Procura o curso no sistema pelo seu código único
+            Curso curso = cursoController.findById(1L);
+            // Se o curso existir, executa a remoção
+            if (curso != null) {
+                // Ordena ao controlador a exclusão definitiva
+                cursoController.delete(curso);
+                // Avisa que a operação foi concluída com sucesso
                 JOptionPane.showMessageDialog(this, "Curso removido!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
-                entityManager.getTransaction().rollback();
             }
-        } catch (Exception ex) {
-            // Tratamento se algum erro acontecer durante a remoção 
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }}
-        
+        }
     }//GEN-LAST:event_btnRemover8ActionPerformed
 
     private void btnRemover7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover7ActionPerformed
-               try {
-            // Antes de remover realizamos uma busca pelo id
-            entityManager.getTransaction().begin();
-            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
-            
-            if (cursoEncontrado != null) {
-                entityManager.remove(cursoEncontrado); // Deleta o objeto 
-                entityManager.getTransaction().commit();
+         try {
+            // Procura o curso no sistema pelo seu código único
+            Curso curso = cursoController.findById(1L);
+            // Se o curso existir, executa a remoção
+            if (curso != null) {
+                // Ordena ao controlador a exclusão definitiva
+                cursoController.delete(curso);
+                // Avisa que a operação foi concluída com sucesso
                 JOptionPane.showMessageDialog(this, "Curso removido!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
-                entityManager.getTransaction().rollback();
             }
-        } catch (Exception ex) {
-            // Tratamento se algum erro acontecer durante a remoção 
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }}
-        
+        }
     }//GEN-LAST:event_btnRemover7ActionPerformed
 
     private void btnRemover6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover6ActionPerformed
-         try {
-            // Antes de remover realizamos uma busca pelo id
-            entityManager.getTransaction().begin();
-            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
-            
-            if (cursoEncontrado != null) {
-                entityManager.remove(cursoEncontrado); // Deleta o objeto 
-                entityManager.getTransaction().commit();
+    try {
+            // Procura o curso no sistema pelo seu código único
+            Curso curso = cursoController.findById(1L);
+            // Se o curso existir, executa a remoção
+            if (curso != null) {
+                // Ordena ao controlador a exclusão definitiva
+                cursoController.delete(curso);
+                // Avisa que a operação foi concluída com sucesso
                 JOptionPane.showMessageDialog(this, "Curso removido!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
-                entityManager.getTransaction().rollback();
             }
-        } catch (Exception ex) {
-            // Tratamento se algum erro acontecer durante a remoção 
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }}
-        
+        }
     }//GEN-LAST:event_btnRemover6ActionPerformed
 
     private void btnRemover5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover5ActionPerformed
-         try {
-            // Antes de remover realizamos uma busca pelo id
-            entityManager.getTransaction().begin();
-            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
-            
-            if (cursoEncontrado != null) {
-                entityManager.remove(cursoEncontrado); // Deleta o objeto 
-                entityManager.getTransaction().commit();
+     try {
+            // Procura o curso no sistema pelo seu código único
+            Curso curso = cursoController.findById(1L);
+            // Se o curso existir, executa a remoção
+            if (curso != null) {
+                // Ordena ao controlador a exclusão definitiva
+                cursoController.delete(curso);
+                // Avisa que a operação foi concluída com sucesso
                 JOptionPane.showMessageDialog(this, "Curso removido!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
-                entityManager.getTransaction().rollback();
             }
-        } catch (Exception ex) {
-            // Tratamento se algum erro acontecer durante a remoção 
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }}
-        
+        }
     }//GEN-LAST:event_btnRemover5ActionPerformed
 
     private void btnRemover4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemover4ActionPerformed
-        try {
-            // Antes de remover realizamos uma busca pelo id
-            entityManager.getTransaction().begin();
-            Curso cursoEncontrado = entityManager.find(Curso.class, 1L);
-            
-            if (cursoEncontrado != null) {
-                entityManager.remove(cursoEncontrado); // Deleta o objeto 
-                entityManager.getTransaction().commit();
+     try {
+            // Procura o curso no sistema pelo seu código único
+            Curso curso = cursoController.findById(1L);
+            // Se o curso existir, executa a remoção
+            if (curso != null) {
+                // Ordena ao controlador a exclusão definitiva
+                cursoController.delete(curso);
+                // Avisa que a operação foi concluída com sucesso
                 JOptionPane.showMessageDialog(this, "Curso removido!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Curso não encontrado!");
-                entityManager.getTransaction().rollback();
             }
-        } catch (Exception ex) {
-            // Tratamento se algum erro acontecer durante a remoção 
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao remover: " + ex.getMessage());
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
         }
     }//GEN-LAST:event_btnRemover4ActionPerformed
 
     private void btnEditar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar3ActionPerformed
-        // TODO add your handling code here:
+       try {
+        // Busca o curso no sistema para alterar
+        Curso curso = cursoController.findById(1L);
+
+        if (curso != null) {
+            // Solicita o novo nome
+            String novoNome = JOptionPane.showInputDialog(this, "Digite o novo nome:", curso.getNome());
+            
+            if (novoNome != null && !novoNome.isEmpty()) {
+                curso.setNome(novoNome);
+                
+                // Pede ao controlador q atualize os dados
+                cursoController.update(curso);
+
+                // Avisa que a alteração foi gravada com sucesso
+                JOptionPane.showMessageDialog(this, "Curso atualizado!");
+            }
+        }
+    } catch (RuntimeException ex) {
+        // Exibe erro caso a conexão com o banco falhe
+        JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
     }//GEN-LAST:event_btnEditar3ActionPerformed
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-        // TODO add your handling code here:
+           try {
+        // Busca o curso no sistema para alterar
+        Curso curso = cursoController.findById(1L);
+
+        if (curso != null) {
+            // Solicita o novo nome
+            String novoNome = JOptionPane.showInputDialog(this, "Digite o novo nome:", curso.getNome());
+            
+            if (novoNome != null && !novoNome.isEmpty()) {
+                curso.setNome(novoNome);
+                
+                // Pede ao controlador q atualize os dados
+                cursoController.update(curso);
+
+                // Avisa que a alteração foi gravada com sucesso
+                JOptionPane.showMessageDialog(this, "Curso atualizado!");
+            }
+        }
+    } catch (RuntimeException ex) {
+        // Exibe erro caso a conexão com o banco falhe
+        JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
     }//GEN-LAST:event_btnEditar1ActionPerformed
+
+    private void btnEditar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar2ActionPerformed
+          try {
+        // Busca o curso no sistema para alterar
+        Curso curso = cursoController.findById(1L);
+
+        if (curso != null) {
+            // Solicita o novo nome
+            String novoNome = JOptionPane.showInputDialog(this, "Digite o novo nome:", curso.getNome());
+            
+            if (novoNome != null && !novoNome.isEmpty()) {
+                curso.setNome(novoNome);
+                
+                // Pede ao controlador q atualize os dados
+                cursoController.update(curso);
+
+                // Avisa que a alteração foi gravada com sucesso
+                JOptionPane.showMessageDialog(this, "Curso atualizado!");
+            }
+        }
+    } catch (RuntimeException ex) {
+        // Exibe erro caso a conexão com o banco falhe
+        JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnEditar2ActionPerformed
+
+    private void btnEditar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar4ActionPerformed
+          try {
+        // Busca o curso no sistema para alterar
+        Curso curso = cursoController.findById(1L);
+
+        if (curso != null) {
+            // Solicita o novo nome
+            String novoNome = JOptionPane.showInputDialog(this, "Digite o novo nome:", curso.getNome());
+            
+            if (novoNome != null && !novoNome.isEmpty()) {
+                curso.setNome(novoNome);
+                
+                // Pede ao controlador q atualize os dados
+                cursoController.update(curso);
+
+                // Avisa que a alteração foi gravada com sucesso
+                JOptionPane.showMessageDialog(this, "Curso atualizado!");
+            }
+        }
+    } catch (RuntimeException ex) {
+        // Exibe erro caso a conexão com o banco falhe
+        JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnEditar4ActionPerformed
+
+    private void btnEditar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar5ActionPerformed
+           try {
+        // Busca o curso no sistema para alterar
+        Curso curso = cursoController.findById(1L);
+
+        if (curso != null) {
+            // Solicita o novo nome
+            String novoNome = JOptionPane.showInputDialog(this, "Digite o novo nome:", curso.getNome());
+            
+            if (novoNome != null && !novoNome.isEmpty()) {
+                curso.setNome(novoNome);
+                
+                // Pede ao controlador q atualize os dados
+                cursoController.update(curso);
+
+                // Avisa que a alteração foi gravada com sucesso
+                JOptionPane.showMessageDialog(this, "Curso atualizado!");
+            }
+        }
+    } catch (RuntimeException ex) {
+        // Exibe erro caso a conexão com o banco falhe
+        JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnEditar5ActionPerformed
+
+    private void btnEditar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar6ActionPerformed
+          try {
+        // Busca o curso no sistema para alterar
+        Curso curso = cursoController.findById(1L);
+
+        if (curso != null) {
+            // Solicita o novo nome
+            String novoNome = JOptionPane.showInputDialog(this, "Digite o novo nome:", curso.getNome());
+            
+            if (novoNome != null && !novoNome.isEmpty()) {
+                curso.setNome(novoNome);
+                
+                // Pede ao controlador q atualize os dados
+                cursoController.update(curso);
+
+                // Avisa que a alteração foi gravada com sucesso
+                JOptionPane.showMessageDialog(this, "Curso atualizado!");
+            }
+        }
+    } catch (RuntimeException ex) {
+        // Exibe erro caso a conexão com o banco falhe
+        JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnEditar6ActionPerformed
+
+    private void btnEditar7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar7ActionPerformed
+           try {
+        // Busca o curso no sistema para alterar
+        Curso curso = cursoController.findById(1L);
+
+        if (curso != null) {
+            // Solicita o novo nome
+            String novoNome = JOptionPane.showInputDialog(this, "Digite o novo nome:", curso.getNome());
+            
+            if (novoNome != null && !novoNome.isEmpty()) {
+                curso.setNome(novoNome);
+                
+                // Pede ao controlador q atualize os dados
+                cursoController.update(curso);
+
+                // Avisa que a alteração foi gravada com sucesso
+                JOptionPane.showMessageDialog(this, "Curso atualizado!");
+            }
+        }
+    } catch (RuntimeException ex) {
+        // Exibe erro caso a conexão com o banco falhe
+        JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnEditar7ActionPerformed
+
+    private void btnEditar8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar8ActionPerformed
+         try {
+        // Busca o curso no sistema para alterar
+        Curso curso = cursoController.findById(1L);
+
+        if (curso != null) {
+            // Solicita o novo nome
+            String novoNome = JOptionPane.showInputDialog(this, "Digite o novo nome:", curso.getNome());
+            
+            if (novoNome != null && !novoNome.isEmpty()) {
+                curso.setNome(novoNome);
+                
+                // Pede ao controlador q atualize os dados
+                cursoController.update(curso);
+
+                // Avisa que a alteração foi gravada com sucesso
+                JOptionPane.showMessageDialog(this, "Curso atualizado!");
+            }
+        }
+    } catch (RuntimeException ex) {
+        // Exibe erro caso a conexão com o banco falhe
+        JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnEditar8ActionPerformed
+
+    private void btnEditar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar9ActionPerformed
+  try {
+        // Busca o curso no sistema para alterar
+        Curso curso = cursoController.findById(1L);
+
+        if (curso != null) {
+            // Solicita o novo nome
+            String novoNome = JOptionPane.showInputDialog(this, "Digite o novo nome:", curso.getNome());
+            
+            if (novoNome != null && !novoNome.isEmpty()) {
+                curso.setNome(novoNome);
+                
+                // Pede ao controlador q atualize os dados
+                cursoController.update(curso);
+
+                // Avisa que a alteração foi gravada com sucesso
+                JOptionPane.showMessageDialog(this, "Curso atualizado!");
+            }
+        }
+    } catch (RuntimeException ex) {
+        // Exibe erro caso a conexão com o banco falhe
+        JOptionPane.showMessageDialog(this, "Erro ao editar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnEditar9ActionPerformed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+       try {
+        // Cria um objeto Curso
+        Curso curso = new Curso();
+        
+        //Pega o nome que digitado na caixa de texto
+        curso.setNome(txtAdicionar.getText());
+
+        //Envia para o Controller
+        cursoController.save(curso);
+
+        //Avisaque deu certo
+        JOptionPane.showMessageDialog(this, "Curso salvo com sucesso!");
+        
+        // Limpa o campo após salvar
+        txtAdicionar.setText("");
+        
+    } catch (RuntimeException ex) {
+        // Se o banco estiver desligado ou o nome for vazio, avisa o erro
+        JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       // Inicializando as configurações do JPA
-try {
+    try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CursoListar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        java.awt.EventQueue.invokeLater(() -> new CursoListar().setVisible(true));
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new CursoListar().setVisible(true);
+            }
+        });
     }
         
     
@@ -565,6 +785,7 @@ try {
     private javax.swing.JButton btnEditar6;
     private javax.swing.JButton btnEditar7;
     private javax.swing.JButton btnEditar8;
+    private javax.swing.JButton btnEditar9;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRemover1;
     private javax.swing.JButton btnRemover2;
@@ -578,12 +799,14 @@ try {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
-    private java.awt.Label lblEditar;
+    private java.awt.Label lblEditar1;
     private java.awt.Label lblFornecedor;
     private java.awt.Label lblNome;
     private java.awt.Label lblQuantidade;
-    private java.awt.Label lblRemover;
+    private java.awt.Label lblRemove;
+    private javax.swing.JTextPane txtAdicionar;
     private javax.swing.JTextPane txtPesquisa;
     // End of variables declaration//GEN-END:variables
 }
